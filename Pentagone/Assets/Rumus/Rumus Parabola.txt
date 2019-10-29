@@ -1,0 +1,22 @@
+vx = Vox = Vo cos 0 // glb
+vy = Voy - g * t // glbb
+
+Voy = Vo sin 0
+Vox = Vo cos 0
+Vo = Vox / cos 0
+Vo = Voy / sin 0
+Vy = Vo sin 0 - g * t
+
+x = Vox * t = vx cos 0* t
+y = Voy * t - 1/2 g * t^2
+Vr = akar(Vx^2 + Vy^2)
+tan 0 = Vy / Vx
+
+Tp -> Vy = 0
+Tp = Voy / g = (Vo sin 0) / g
+Tt = 2Tp
+Tt = 2 (Vo sin 0) / g
+
+Hmax = Vo^2 sin 0^2 / 2g
+Xmax = 2 * Vo^2 * sin 0 * cos 0 / g
+Vo^2 = (Xmax * g) / 2 * sin 0 * cos 0
