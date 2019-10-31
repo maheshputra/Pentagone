@@ -7,7 +7,7 @@ public class CharacterMovement : MonoBehaviour
     public static CharacterMovement instance; //singleton
 
     private Rigidbody2D rb; //rigidbody2d pada character
-    private Animator anim; //animator pada character
+    [SerializeField] private Animator anim; //animator pada character
     private Vector3 currentScale; //transform scale player yang sekarang
     private bool facingRight; //boolean dia menghadap 
 
@@ -60,12 +60,12 @@ public class CharacterMovement : MonoBehaviour
             instance = this;
 
         rb = GetComponent<Rigidbody2D>();
-        anim = GetComponent<Animator>();
+        //anim = GetComponent<Animator>();
     }
 
     private void Start()
     {
-        currentScale = transform.localScale;
+        currentScale = anim.transform.localScale;
         canDash = true;
         damaged = false;
         defaultLinearDrag = rb.drag;
@@ -152,12 +152,12 @@ public class CharacterMovement : MonoBehaviour
     {
         if (inputX < 0)
         {
-            transform.localScale = new Vector3(currentScale.x * -1, currentScale.y, currentScale.z);
+            anim.transform.localScale = new Vector3(currentScale.x, currentScale.y, currentScale.z);
             facingRight = false;
         }
         else if (inputX > 0)
         {
-            transform.localScale = new Vector3(currentScale.x, currentScale.y, currentScale.z);
+            anim.transform.localScale = new Vector3(currentScale.x * -1, currentScale.y, currentScale.z);
             facingRight = true;
         }
     }
@@ -239,14 +239,14 @@ public class CharacterMovement : MonoBehaviour
         {
             //rb.velocity = new Vector2(-1, 1f) * jumpVelocity;
             //rb.AddForce(-Vector2.right * jumpVelocity + Vector2.up * jumpVelocity, ForceMode2D.Force);
-            transform.localScale = new Vector3(currentScale.x * -1, currentScale.y, currentScale.z);
+            anim.transform.localScale = new Vector3(currentScale.x, currentScale.y, currentScale.z);
         }
         else
         {
             wallJumpRight = true;
             //rb.velocity = new Vector2(1, 1f) * jumpVelocity;
             //rb.AddForce(Vector2.right * jumpVelocity + Vector2.up * jumpVelocity, ForceMode2D.Force);
-            transform.localScale = new Vector3(currentScale.x, currentScale.y, currentScale.z);
+            anim.transform.localScale = new Vector3(currentScale.x *-1, currentScale.y, currentScale.z);
         }
         StartCoroutine(WallJumping());
     }
