@@ -14,6 +14,11 @@ public class Deadzone : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Function untuk respawn sesuai dengan posisi
+    /// </summary>
+    /// <param name="player"></param>
+    /// <returns></returns>
     private IEnumerator Respawn(GameObject player) {
         yield return new WaitForSeconds(0.5f);
         player.transform.position = respawnPosition.position;

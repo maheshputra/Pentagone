@@ -78,7 +78,7 @@ MonoBehaviour:
     states:
     - name: Sight
       description: 
-      colorIndex: 0
+      colorIndex: 3
       position:
         serializedVersion: 2
         x: 50
@@ -251,7 +251,7 @@ MonoBehaviour:
     states:
     - name: Line Cast
       description: 
-      colorIndex: 0
+      colorIndex: 3
       position:
         serializedVersion: 2
         x: 58
@@ -1079,7 +1079,7 @@ MonoBehaviour:
     states:
     - name: Move
       description: 
-      colorIndex: 0
+      colorIndex: 3
       position:
         serializedVersion: 2
         x: 214
@@ -1219,7 +1219,7 @@ MonoBehaviour:
         paramByteDataSize: 0000000000000000000000000000000001000000000000000000000000000000000000000100000000000000000000000000000001000000
     - name: Stop Move
       description: 
-      colorIndex: 0
+      colorIndex: 6
       position:
         serializedVersion: 2
         x: 56
@@ -1495,7 +1495,7 @@ MonoBehaviour:
     states:
     - name: Moving
       description: 
-      colorIndex: 0
+      colorIndex: 3
       position:
         serializedVersion: 2
         x: 379.78125
@@ -1611,7 +1611,7 @@ MonoBehaviour:
           tooltip: 
           showInInspector: 1
           networkSync: 0
-          value: 4
+          value: 3
         - useVariable: 1
           name: moveTimeCountdown
           tooltip: 
@@ -1680,11 +1680,11 @@ MonoBehaviour:
         paramByteDataSize: 0000000000000000000000000000000000000000000000000100000000000000000000000100000000000000000000000100000000000000000000000100000001000000000000000000000000000000010000000100000000000000
     - name: Attacking
       description: 
-      colorIndex: 0
+      colorIndex: 3
       position:
         serializedVersion: 2
-        x: 373.3125
-        y: 269.4922
+        x: 401.16406
+        y: 310.78906
         width: 100
         height: 32
       isBreakpoint: 0
@@ -1788,7 +1788,7 @@ MonoBehaviour:
         paramByteDataSize: 0000000000000000010000000100000000000000000000000000000000000000000000000000000001000000
     - name: Set Default Value
       description: Pattern pergerakan spit monster
-      colorIndex: 0
+      colorIndex: 3
       position:
         serializedVersion: 2
         x: 55
@@ -1916,11 +1916,11 @@ MonoBehaviour:
         paramByteDataSize: 000000000000000001000000000000000000000001000000000000000000000001000000000000000000000001000000
     - name: Reset Countdown
       description: 
-      colorIndex: 0
+      colorIndex: 6
       position:
         serializedVersion: 2
-        x: 355
-        y: 194
+        x: 355.17188
+        y: 233.38281
         width: 145
         height: 48
       isBreakpoint: 0
@@ -1928,18 +1928,18 @@ MonoBehaviour:
       hideUnused: 0
       transitions:
       - fsmEvent:
-          name: Attack
-          isSystemEvent: 0
-          isGlobal: 0
-        toState: Attacking
-        linkStyle: 0
-        linkConstraint: 0
-        colorIndex: 0
-      - fsmEvent:
           name: Move
           isSystemEvent: 0
           isGlobal: 0
         toState: Move
+        linkStyle: 0
+        linkConstraint: 0
+        colorIndex: 0
+      - fsmEvent:
+          name: Attack
+          isSystemEvent: 0
+          isGlobal: 0
+        toState: Attacking
         linkStyle: 0
         linkConstraint: 0
         colorIndex: 0
@@ -2046,11 +2046,11 @@ MonoBehaviour:
         paramByteDataSize: 0000000000000000010000000000000000000000010000000000000000000000000000000100000000000000000000000000000001000000
     - name: Attack
       description: 
-      colorIndex: 0
+      colorIndex: 2
       position:
         serializedVersion: 2
-        x: 228
-        y: 167.00781
+        x: 217
+        y: 191.07812
         width: 100
         height: 48
       isBreakpoint: 0
@@ -2058,18 +2058,18 @@ MonoBehaviour:
       hideUnused: 0
       transitions:
       - fsmEvent:
-          name: FINISHED
-          isSystemEvent: 1
-          isGlobal: 0
-        toState: Reset Countdown
-        linkStyle: 0
-        linkConstraint: 0
-        colorIndex: 0
-      - fsmEvent:
           name: Move
           isSystemEvent: 0
           isGlobal: 0
         toState: Move
+        linkStyle: 0
+        linkConstraint: 0
+        colorIndex: 0
+      - fsmEvent:
+          name: FINISHED
+          isSystemEvent: 1
+          isGlobal: 0
+        toState: Reset Countdown
         linkStyle: 0
         linkConstraint: 0
         colorIndex: 0
@@ -2162,11 +2162,11 @@ MonoBehaviour:
         paramByteDataSize: 00000000000000000100000000000000000000000100000000000000000000000000000001000000
     - name: Move
       description: 
-      colorIndex: 0
+      colorIndex: 3
       position:
         serializedVersion: 2
-        x: 526.1094
-        y: 161
+        x: 569.47656
+        y: 227.85156
         width: 100
         height: 32
       isBreakpoint: 0
@@ -2624,7 +2624,7 @@ MonoBehaviour:
     states:
     - name: Moving Right
       description: 
-      colorIndex: 0
+      colorIndex: 7
       position:
         serializedVersion: 2
         x: 355
@@ -2845,7 +2845,7 @@ MonoBehaviour:
         paramByteDataSize: 0000000000000000000000000000000001000000000000000000000000000000000000000000000001000000010000000000000000000000000000000100000001000000000000000000000000000000000000000000000000000000010000000000000000000000000000000100000000000000000000000000000001000000
     - name: Moving Left
       description: 
-      colorIndex: 0
+      colorIndex: 7
       position:
         serializedVersion: 2
         x: 52
@@ -3066,7 +3066,7 @@ MonoBehaviour:
         paramByteDataSize: 0000000000000000000000000000000000000000010000000100000000000000000000000000000000000000010000000000000000000000000000000100000001000000000000000000000000000000000000000000000000000000010000000000000000000000000000000100000000000000000000000000000001000000
     - name: Cant Move
       description: 
-      colorIndex: 0
+      colorIndex: 6
       position:
         serializedVersion: 2
         x: 223
@@ -3148,7 +3148,7 @@ MonoBehaviour:
         paramByteDataSize: 000000000000000000000000010000000100000000000000
     - name: Get Sprite Scale
       description: 
-      colorIndex: 0
+      colorIndex: 3
       position:
         serializedVersion: 2
         x: 199
@@ -3556,7 +3556,7 @@ MonoBehaviour:
     states:
     - name: Attack
       description: 
-      colorIndex: 0
+      colorIndex: 3
       position:
         serializedVersion: 2
         x: 243.375
@@ -3689,7 +3689,7 @@ MonoBehaviour:
         paramByteDataSize: 00000000000000000000000000000000010000000000000000000000000000000000000000000000010000000100000000000000
     - name: Stop Attack
       description: 
-      colorIndex: 0
+      colorIndex: 6
       position:
         serializedVersion: 2
         x: 59.28125

@@ -98,7 +98,7 @@ MonoBehaviour:
     states:
     - name: Attack
       description: 
-      colorIndex: 0
+      colorIndex: 3
       position:
         serializedVersion: 2
         x: 243.375
@@ -239,7 +239,7 @@ MonoBehaviour:
         paramByteDataSize: 0000000000000000000000000000000001000000000000000000000000000000000000000000000000000000000000000000000001000000
     - name: Stop Attack
       description: 
-      colorIndex: 0
+      colorIndex: 6
       position:
         serializedVersion: 2
         x: 59.28125
@@ -638,7 +638,7 @@ MonoBehaviour:
     states:
     - name: Moving Right
       description: 
-      colorIndex: 0
+      colorIndex: 7
       position:
         serializedVersion: 2
         x: 355
@@ -859,7 +859,7 @@ MonoBehaviour:
         paramByteDataSize: 0000000000000000000000000000000001000000000000000000000000000000000000000000000001000000010000000000000000000000000000000100000001000000000000000000000000000000000000000000000000000000010000000000000000000000000000000100000000000000000000000000000001000000
     - name: Moving Left
       description: 
-      colorIndex: 0
+      colorIndex: 7
       position:
         serializedVersion: 2
         x: 52
@@ -1080,7 +1080,7 @@ MonoBehaviour:
         paramByteDataSize: 0000000000000000000000000000000000000000010000000100000000000000000000000000000000000000010000000000000000000000000000000100000001000000000000000000000000000000000000000000000000000000010000000000000000000000000000000100000000000000000000000000000001000000
     - name: Cant Move
       description: 
-      colorIndex: 0
+      colorIndex: 6
       position:
         serializedVersion: 2
         x: 223
@@ -1162,7 +1162,7 @@ MonoBehaviour:
         paramByteDataSize: 000000000000000000000000010000000100000000000000
     - name: Get Sprite Scale
       description: 
-      colorIndex: 0
+      colorIndex: 3
       position:
         serializedVersion: 2
         x: 199
@@ -1572,11 +1572,11 @@ MonoBehaviour:
     states:
     - name: Moving
       description: 
-      colorIndex: 0
+      colorIndex: 7
       position:
         serializedVersion: 2
         x: 55
-        y: 189
+        y: 173
         width: 100
         height: 32
       isBreakpoint: 0
@@ -1731,11 +1731,11 @@ MonoBehaviour:
         paramByteDataSize: 0000000000000000010000000000000000000000010000000000000000000000010000000000000000000000010000000100000000000000000000000000000000000000000000000000000001000000
     - name: Attacking
       description: 
-      colorIndex: 0
+      colorIndex: 7
       position:
         serializedVersion: 2
         x: 221
-        y: 190
+        y: 174
         width: 100
         height: 32
       isBreakpoint: 0
@@ -1890,11 +1890,11 @@ MonoBehaviour:
         paramByteDataSize: 0000000000000000010000000000000000000000010000000000000000000000010000000000000000000000010000000100000000000000000000000000000000000000000000000000000001000000
     - name: Set Default Value
       description: 
-      colorIndex: 0
+      colorIndex: 3
       position:
         serializedVersion: 2
-        x: 103
-        y: 115
+        x: 106
+        y: 100
         width: 145
         height: 32
       isBreakpoint: 0
@@ -2250,7 +2250,7 @@ MonoBehaviour:
     states:
     - name: Line Cast
       description: 
-      colorIndex: 0
+      colorIndex: 3
       position:
         serializedVersion: 2
         x: 58
@@ -3078,7 +3078,7 @@ MonoBehaviour:
     states:
     - name: Move
       description: 
-      colorIndex: 0
+      colorIndex: 3
       position:
         serializedVersion: 2
         x: 214
@@ -3218,7 +3218,7 @@ MonoBehaviour:
         paramByteDataSize: 0000000000000000000000000000000001000000000000000000000000000000000000000100000000000000000000000000000001000000
     - name: Stop Move
       description: 
-      colorIndex: 0
+      colorIndex: 6
       position:
         serializedVersion: 2
         x: 56
@@ -3432,7 +3432,7 @@ MonoBehaviour:
     handleJointBreak: 0
     handleJointBreak2D: 0
     handleOnGUI: 0
-    handleFixedUpdate: 1
+    handleFixedUpdate: 0
     handleLateUpdate: 0
     handleApplicationEvents: 0
     handleUiEvents: 0

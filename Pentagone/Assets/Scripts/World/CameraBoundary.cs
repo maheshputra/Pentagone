@@ -7,9 +7,9 @@ public class CameraBoundary : MonoBehaviour
 {
     public static CameraBoundary instance;
 
-    [SerializeField] private CinemachineVirtualCamera currentActiveCamera;
-    [SerializeField] private CameraBoundaryTrigger[] cameraBoundaryTrigger;
-    [SerializeField] private CinemachineVirtualCamera[] virtualCamera;
+    [SerializeField] private CinemachineVirtualCamera currentActiveCamera; //camera yang active
+    [SerializeField] private CameraBoundaryTrigger[] cameraBoundaryTrigger; //array dari trigger yang ada
+    [SerializeField] private CinemachineVirtualCamera[] virtualCamera; //aray dari camera yang ada
 
 
     private void Awake()
@@ -36,6 +36,11 @@ public class CameraBoundary : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Function untuk mengubah camera boundary yang baru
+    /// public karena dipanggil dari script camera boundary trigger
+    /// </summary>
+    /// <param name="boundaryNumber">nomor boundary sesuai trigger</param>
     public void SetNewBoundary(int boundaryNumber)
     {
         virtualCamera[boundaryNumber].m_Priority = 1;
