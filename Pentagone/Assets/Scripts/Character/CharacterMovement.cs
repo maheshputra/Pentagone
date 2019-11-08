@@ -7,7 +7,11 @@ public class CharacterMovement : MonoBehaviour
     public static CharacterMovement instance; //singleton
 
     private Rigidbody2D rb; //rigidbody2d pada character
-    [SerializeField] private Animator anim; //animator pada character
+
+    [Header("Character Sprite")]
+    [SerializeField] private Transform playerSprite; //sprite pada character
+    private Animator anim; //animator pada character
+    private CharacterSprite characterSprite; //characterSprite pada playersprite
     private Vector3 currentScale; //transform scale player yang sekarang
     private bool facingRight; //boolean dia menghadap 
 
@@ -49,8 +53,17 @@ public class CharacterMovement : MonoBehaviour
     private float defaultLinearDrag; //linear drag default
     private float defaultGravityScale; //gravity scale default
     private bool canDash; //kondisi ketika bisa melakukan dash
-    private bool isDashing; //kondisi ketika lagi dash
+    [SerializeField] private bool isDashing; //kondisi ketika lagi dash
+    [SerializeField] private bool isAttacking; //di set dari animasi attack
     [SerializeField] private bool damaged; //ketika sedang terkena damage
+
+    [Header("Wall Slide")]
+    [Range(-10, 0)] [SerializeField] private float wallSlideSpeed;
+
+    [Header("Sound")]
+    [SerializeField] private AudioSource audioSource;
+    [SerializeField] private AudioClip dashClip;    
+
 
     private void Awake()
     {
@@ -60,12 +73,13 @@ public class CharacterMovement : MonoBehaviour
             instance = this;
 
         rb = GetComponent<Rigidbody2D>();
-        //anim = GetComponent<Animator>();
+        anim = playerSprite.GetComponent<Animator>();
+        characterSprite = playerSprite.GetComponent<CharacterSprite>();
     }
 
     private void Start()
     {
-        currentScale = anim.transform.localScale;
+        currentScale = playerSprite.localScale;
         canDash = true;
         damaged = false;
         defaultLinearDrag = rb.drag;
@@ -78,31 +92,50 @@ public class CharacterMovement : MonoBehaviour
         {
             inputX = 0;
             inputY = 0;
-            if (wallJumpRight)
-                rb.velocity = new Vector2(1, 1f) * wallJumpVelocity;
-            else
-                rb.velocity = new Vector2(-1, 1f) * wallJumpVelocity;
             return;
         }
         else {
             GetInput();
-            if (!isDashing)
+            if (!isDashing && !isAttacking)
                 Walk(inputDir);
         }
 
         LookDirection();
-        Jump();
-        Dash();
+        if (!damaged && !isDashing)
+        {
+            if (!isAttacking)
+            {
+                Jump();
+                Dash();
+            }
+            Attack();
+        }
+
+        isAttacking = characterSprite.isAttacking;
     }
 
     private void FixedUpdate()
     {
+        #region Attack
+        if (isAttacking)
+            if(onGround)
+                rb.velocity = new Vector2(0, rb.velocity.y);
+        #endregion
+
         #region Jump
         if (!isWallJumping)
         {
             if (rb.velocity.y < 0) //untuk lompat tinggi
                 rb.velocity += Vector2.up * Physics2D.gravity.y * (fallMultiplier - 1) * Time.deltaTime;
         }
+        else
+        {
+            if (wallJumpRight)
+                rb.velocity = new Vector2(1, 1f) * wallJumpVelocity;
+            else
+                rb.velocity = new Vector2(-1, 1f) * wallJumpVelocity;
+        }
+
         if (rb.velocity.y > 0 && (!Input.GetButton("Jump") || damaged)) //untuk lompat rendah
         {
             rb.velocity += Vector2.up * Physics2D.gravity.y * (lowJumpMultiplier - 1) * Time.deltaTime;
@@ -121,8 +154,8 @@ public class CharacterMovement : MonoBehaviour
 
         if (!isDashing)
         {
-            if (lean && rb.velocity.y <= 0) //untuk lompat tapi nge lean
-                rb.velocity = new Vector2(0, -1);
+            if (lean && rb.velocity.y <= 0) //untuk lompat tapi nge lean (wallslide)
+                rb.velocity = new Vector2(0, wallSlideSpeed);
             else
                 rb.gravityScale = defaultGravityScale;
         }
@@ -152,12 +185,12 @@ public class CharacterMovement : MonoBehaviour
     {
         if (inputX < 0)
         {
-            anim.transform.localScale = new Vector3(currentScale.x, currentScale.y, currentScale.z);
+            playerSprite.localScale = new Vector3(currentScale.x, currentScale.y, currentScale.z);
             facingRight = false;
         }
         else if (inputX > 0)
         {
-            anim.transform.localScale = new Vector3(currentScale.x * -1, currentScale.y, currentScale.z);
+            playerSprite.localScale = new Vector3(currentScale.x * -1, currentScale.y, currentScale.z);
             facingRight = true;
         }
     }
@@ -198,6 +231,7 @@ public class CharacterMovement : MonoBehaviour
 
         if(!damaged)
             rb.velocity = new Vector2(dir.x * speed, rb.velocity.y);
+
         anim.SetFloat("moveX", Mathf.Abs(dir.x));
     }
 
@@ -220,6 +254,13 @@ public class CharacterMovement : MonoBehaviour
         }
     }
 
+    private void Attack() {
+        if (Input.GetButtonDown("Attack"))
+        {
+            anim.SetTrigger("attack");
+        }
+    }
+
     /// <summary>
     /// Function lompat ketika ada di ground
     /// </summary>
@@ -239,14 +280,14 @@ public class CharacterMovement : MonoBehaviour
         {
             //rb.velocity = new Vector2(-1, 1f) * jumpVelocity;
             //rb.AddForce(-Vector2.right * jumpVelocity + Vector2.up * jumpVelocity, ForceMode2D.Force);
-            anim.transform.localScale = new Vector3(currentScale.x, currentScale.y, currentScale.z);
+            playerSprite.localScale = new Vector3(currentScale.x, currentScale.y, currentScale.z);
         }
         else
         {
             wallJumpRight = true;
             //rb.velocity = new Vector2(1, 1f) * jumpVelocity;
             //rb.AddForce(Vector2.right * jumpVelocity + Vector2.up * jumpVelocity, ForceMode2D.Force);
-            anim.transform.localScale = new Vector3(currentScale.x *-1, currentScale.y, currentScale.z);
+            playerSprite.localScale = new Vector3(currentScale.x *-1, currentScale.y, currentScale.z);
         }
         StartCoroutine(WallJumping());
     }
@@ -271,6 +312,7 @@ public class CharacterMovement : MonoBehaviour
         if (Input.GetButtonDown("Dash") && canDash)
         {
             DoDash(inputDir);
+            audioSource.PlayOneShot(dashClip);
         }
         if (!isDashing && !canDash && onGround)
         {
@@ -323,7 +365,14 @@ public class CharacterMovement : MonoBehaviour
     }
 
     private void SpawnEcho() {
-        GameObject echo = Instantiate(echoPrefab, transform.position, Quaternion.identity, null);
+        GameObject echo = Instantiate(echoPrefab, anim.transform.position, Quaternion.identity, null);
+        echo.GetComponent<SpriteRenderer>().sprite = playerSprite.GetComponent<SpriteRenderer>().sprite;
+        if (playerSprite.localScale.x < 0)
+        {
+            Vector3 alternateScale = echo.transform.localScale;
+            alternateScale.x = alternateScale.x * -1;
+            echo.transform.localScale = alternateScale;
+        }
         Destroy(echo, echoDestroyTime);
     }
 
@@ -353,4 +402,5 @@ public class CharacterMovement : MonoBehaviour
         damaged = false;
         anim.SetBool("damaged", damaged);
     }
+
 }

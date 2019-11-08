@@ -257,7 +257,7 @@ MonoBehaviour:
   AllowSceneActivation: 0
   SceneActivationDelay: 0.2
   SceneBuildIndex: 0
-  SceneName: Scene1
+  SceneName: Chapter_1
 --- !u!114 &4974603287128183296
 MonoBehaviour:
   m_ObjectHideFlags: 1

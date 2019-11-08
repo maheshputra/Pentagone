@@ -10,7 +10,12 @@ PrefabInstance:
     - target: {fileID: 403428392724045529, guid: c684e821617ca784c85e464e3c08452d,
         type: 3}
       propertyPath: m_Name
-      value: Projectile Kapas Targeting Variant
+      value: Projectile Kapas Fall
+      objectReference: {fileID: 0}
+    - target: {fileID: 403428392724045529, guid: c684e821617ca784c85e464e3c08452d,
+        type: 3}
+      propertyPath: m_TagString
+      value: EnemyProjectile
       objectReference: {fileID: 0}
     - target: {fileID: 403428392724045535, guid: c684e821617ca784c85e464e3c08452d,
         type: 3}
@@ -71,6 +76,11 @@ PrefabInstance:
         type: 3}
       propertyPath: projectileType
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 403428392724045533, guid: c684e821617ca784c85e464e3c08452d,
+        type: 3}
+      propertyPath: projectileSpeed
+      value: 15
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c684e821617ca784c85e464e3c08452d, type: 3}

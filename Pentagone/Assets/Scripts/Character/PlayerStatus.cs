@@ -7,7 +7,8 @@ public class PlayerStatus : MonoBehaviour
     public static PlayerStatus instance; //singleton
 
     private int maxHp = 20; //maximum hp
-    [SerializeField] private int currentMaxHp; //current maximum hp
+    
+    [SerializeField] [Range(1, 20)] private int currentMaxHp; //current maximum hp
     [SerializeField] private int currentHp; //current hp
 
     [Header("UI")]
