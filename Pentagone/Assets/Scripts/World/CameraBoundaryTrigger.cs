@@ -12,7 +12,10 @@ public class CameraBoundaryTrigger : MonoBehaviour
     /// <param name="collision">player</param>
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.CompareTag("Player"))
+        if (collision.CompareTag("Player") && collision.isTrigger)
+        {
             CameraBoundary.instance.SetNewBoundary(boundaryNumber);
+            Debug.Log(boundaryNumber);
+        }
     }
 }

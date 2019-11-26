@@ -3778,6 +3778,7 @@ MonoBehaviour:
       actionData:
         actionNames:
         - HutongGames.PlayMaker.Actions.DebugLog
+        - HutongGames.PlayMaker.Actions.SetAnimatorTrigger
         - HutongGames.PlayMaker.Actions.IntAdd
         - HutongGames.PlayMaker.Actions.IntCompare
         - HutongGames.PlayMaker.Actions.FloatAdd
@@ -3788,13 +3789,22 @@ MonoBehaviour:
         - 
         - 
         - 
-        actionEnabled: 0001010101
-        actionIsOpen: 0101010101
-        actionStartIndex: 0000000003000000060000000c00000010000000
-        actionHashCodes: 9c59e501603dd90509faa1022a6e8a001bcdca04
+        - 
+        actionEnabled: 000101010101
+        actionIsOpen: 010101010101
+        actionStartIndex: 000000000300000005000000080000000e00000012000000
+        actionHashCodes: 9c59e5019bd6f801603dd90509faa1022a6e8a001bcdca04
         unityObjectParams: []
         fsmGameObjectParams: []
-        fsmOwnerDefaultParams: []
+        fsmOwnerDefaultParams:
+        - ownerOption: 1
+          gameObject:
+            useVariable: 0
+            name: 
+            tooltip: 
+            showInInspector: 0
+            networkSync: 0
+            value: {fileID: 3885065672401756929}
         animationCurveParams: []
         functionCallParams: []
         fsmTemplateControlParams: []
@@ -3808,6 +3818,12 @@ MonoBehaviour:
           showInInspector: 0
           networkSync: 0
           value: Damaged
+        - useVariable: 0
+          name: 
+          tooltip: 
+          showInInspector: 0
+          networkSync: 0
+          value: damaged
         fsmObjectParams: []
         fsmVarParams: []
         fsmArrayParams: []
@@ -3886,11 +3902,13 @@ MonoBehaviour:
         arrayParamTypes: []
         customTypeSizes: 
         customTypeNames: []
-        paramDataType: 0700000012000000010000001000000010000000010000001000000010000000170000001700000017000000010000000f0000000f00000001000000010000000f0000000f0000000f00000017000000170000001700000001000000
+        paramDataType: 07000000120000000100000014000000120000001000000010000000010000001000000010000000170000001700000017000000010000000f0000000f00000001000000010000000f0000000f0000000f00000017000000170000001700000001000000
         paramName:
         - logLevel
         - text
         - sendToUnityLog
+        - gameObject
+        - trigger
         - intVariable
         - add
         - everyFrame
@@ -3911,8 +3929,8 @@ MonoBehaviour:
         - lessThan
         - greaterThan
         - everyFrame
-        paramDataPos: 0000000000000000040000000000000001000000050000000200000003000000000000000100000002000000060000000000000001000000070000000800000002000000030000000400000003000000040000000500000009000000
-        paramByteDataSize: 0400000000000000010000000000000000000000010000000000000000000000000000000000000000000000010000000000000000000000010000000100000000000000000000000000000000000000000000000000000001000000
+        paramDataPos: 00000000000000000400000000000000010000000000000001000000050000000200000003000000000000000100000002000000060000000000000001000000070000000800000002000000030000000400000003000000040000000500000009000000
+        paramByteDataSize: 04000000000000000100000000000000000000000000000000000000010000000000000000000000000000000000000000000000010000000000000000000000010000000100000000000000000000000000000000000000000000000000000001000000
     - name: Wait To Destroy
       description: 
       colorIndex: 3
@@ -3929,14 +3947,18 @@ MonoBehaviour:
       actionData:
         actionNames:
         - HutongGames.PlayMaker.Actions.ActivateGameObject
+        - HutongGames.PlayMaker.Actions.SetVelocity2d
         - HutongGames.PlayMaker.Actions.DestroyObject
+        - HutongGames.PlayMaker.Actions.SetAnimatorTrigger
         customNames:
         - 
         - 
-        actionEnabled: 0101
-        actionIsOpen: 0101
-        actionStartIndex: 0000000005000000
-        actionHashCodes: b2cf10009ff80c02
+        - 
+        - 
+        actionEnabled: 01010101
+        actionIsOpen: 01010101
+        actionStartIndex: 00000000050000000a0000000d000000
+        actionHashCodes: b2cf1000efa8d3049ff80c029bd6f801
         unityObjectParams: []
         fsmGameObjectParams:
         - useVariable: 0
@@ -3954,24 +3976,58 @@ MonoBehaviour:
             showInInspector: 0
             networkSync: 0
             value: {fileID: 3885065673159794462}
+        - ownerOption: 1
+          gameObject:
+            useVariable: 0
+            name: 
+            tooltip: 
+            showInInspector: 0
+            networkSync: 0
+            value: {fileID: 3885065673358657733}
+        - ownerOption: 1
+          gameObject:
+            useVariable: 0
+            name: 
+            tooltip: 
+            showInInspector: 0
+            networkSync: 0
+            value: {fileID: 3885065672401756929}
         animationCurveParams: []
         functionCallParams: []
         fsmTemplateControlParams: []
         fsmEventTargetParams: []
         fsmPropertyParams: []
         layoutOptionParams: []
-        fsmStringParams: []
+        fsmStringParams:
+        - useVariable: 0
+          name: 
+          tooltip: 
+          showInInspector: 0
+          networkSync: 0
+          value: dead
         fsmObjectParams: []
         fsmVarParams: []
         fsmArrayParams: []
         fsmEnumParams: []
         fsmFloatParams:
         - useVariable: 1
+          name: 
+          tooltip: 
+          showInInspector: 0
+          networkSync: 0
+          value: 0
+        - useVariable: 1
+          name: 
+          tooltip: 
+          showInInspector: 0
+          networkSync: 0
+          value: 0
+        - useVariable: 1
           name: timeToDestroy
           tooltip: 
           showInInspector: 1
           networkSync: 0
-          value: 0
+          value: 2
         fsmIntParams: []
         fsmBoolParams:
         - useVariable: 0
@@ -3992,18 +4048,24 @@ MonoBehaviour:
           showInInspector: 0
           networkSync: 0
           value: 0
-        fsmVector2Params: []
+        fsmVector2Params:
+        - useVariable: 0
+          name: 
+          tooltip: 
+          showInInspector: 0
+          networkSync: 0
+          value: {x: 0, y: 0}
         fsmVector3Params: []
         fsmColorParams: []
         fsmRectParams: []
         fsmQuaternionParams: []
         stringParams: []
-        byteData: 0000
+        byteData: 000000
         arrayParamSizes: 
         arrayParamTypes: []
         customTypeSizes: 
         customTypeNames: []
-        paramDataType: 1400000011000000110000000100000001000000130000000f00000011000000
+        paramDataType: 140000001100000011000000010000000100000014000000250000000f0000000f00000001000000130000000f000000110000001400000012000000
         paramName:
         - gameObject
         - activate
@@ -4011,10 +4073,17 @@ MonoBehaviour:
         - resetOnExit
         - everyFrame
         - gameObject
+        - vector
+        - x
+        - y
+        - everyFrame
+        - gameObject
         - delay
         - detachChildren
-        paramDataPos: 0000000000000000010000000000000001000000000000000000000002000000
-        paramByteDataSize: 0000000000000000000000000100000001000000000000000000000000000000
+        - gameObject
+        - trigger
+        paramDataPos: 000000000000000001000000000000000100000001000000000000000000000001000000020000000000000002000000020000000200000000000000
+        paramByteDataSize: 000000000000000000000000010000000100000000000000000000000000000000000000010000000000000000000000000000000000000000000000
     events:
     - name: FINISHED
       isSystemEvent: 1
