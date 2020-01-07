@@ -32,6 +32,9 @@ public class CharacterMovement : MonoBehaviour
 
     [Header("Collision Checker")]
     [SerializeField] private bool onGround; //kondisi ketika di ground
+    [SerializeField] public int maxJumpCharge; //max jump charge
+    [SerializeField] private int jumpCharge; //jumpCharge
+    [SerializeField] private bool isJumping; //jika sedang lompat
     [SerializeField] private bool onWall; //kondisi ketika di tembok
     [SerializeField] private bool wallOnRight; //kondisi ketika tembok ada di sebelah kanan
     [SerializeField] private bool lean; //kondisi ketika bersandar di tembok
@@ -84,82 +87,96 @@ public class CharacterMovement : MonoBehaviour
         damaged = false;
         defaultLinearDrag = rb.drag;
         defaultGravityScale = rb.gravityScale;
+        maxJumpCharge = 1;
+        jumpCharge = maxJumpCharge;
     }
 
     private void Update()
     {
-        if (isWallJumping)
+        if (!GameStatus.instance.isPaused)
         {
-            inputX = 0;
-            inputY = 0;
-            return;
-        }
-        else {
-            GetInput();
-            if (!isDashing && !isAttacking)
-                Walk(inputDir);
-        }
-
-        LookDirection();
-        if (!damaged && !isDashing)
-        {
-            if (!isAttacking)
+            if (isWallJumping)
             {
-                Jump();
-                Dash();
+                inputX = 0;
+                inputY = 0;
+                return;
             }
-            Attack();
-        }
+            else
+            {
+                GetInput();
+                if (!isDashing && !isAttacking)
+                    Walk(inputDir);
+            }
 
-        isAttacking = characterSprite.isAttacking;
+            LookDirection();
+            if (!damaged && !isDashing)
+            {
+                if (!isAttacking)
+                {
+                    Jump();
+                    Dash();
+                }
+                Attack();
+            }
+
+            isAttacking = characterSprite.isAttacking;
+        }
     }
 
     private void FixedUpdate()
     {
-        #region Attack
-        if (isAttacking)
-            if(onGround)
-                rb.velocity = new Vector2(0, rb.velocity.y);
-        #endregion
+        if (!GameStatus.instance.isPaused)
+        {
+            #region Attack
+            if (isAttacking)
+                if (onGround)
+                    rb.velocity = new Vector2(0, rb.velocity.y);
+            #endregion
 
-        #region Jump
-        if (!isWallJumping)
-        {
-            if (rb.velocity.y < 0) //untuk lompat tinggi
-                rb.velocity += Vector2.up * Physics2D.gravity.y * (fallMultiplier - 1) * Time.deltaTime;
-        }
-        else
-        {
-            if (wallJumpRight)
-                rb.velocity = new Vector2(1, 1f) * wallJumpVelocity;
+            #region Jump
+            if (!isWallJumping)
+            {
+                if (rb.velocity.y < 0) //untuk lompat tinggi
+                    rb.velocity += Vector2.up * Physics2D.gravity.y * (fallMultiplier - 1) * Time.deltaTime;
+            }
             else
-                rb.velocity = new Vector2(-1, 1f) * wallJumpVelocity;
+            {
+                if (wallJumpRight)
+                    rb.velocity = new Vector2(1, 1f) * wallJumpVelocity;
+                else
+                    rb.velocity = new Vector2(-1, 1f) * wallJumpVelocity;
+            }
+
+            if (rb.velocity.y > 0 && (!Input.GetButton("Jump") || damaged || !CharacterSkills.instance.holdJumpSkill)) //untuk lompat rendah
+            {
+                rb.velocity += Vector2.up * Physics2D.gravity.y * (lowJumpMultiplier - 1) * Time.deltaTime;
+            }
+            #endregion
+
+            #region Collision Detection
+            onGround = Physics2D.OverlapCircle((Vector2)transform.position + bottomOffset, collisionRadius, groundLayer);
+            onWall = Physics2D.OverlapCircle((Vector2)transform.position + leftOffset, collisionRadius, groundLayer) ||
+                Physics2D.OverlapCircle((Vector2)transform.position + rightOffset, collisionRadius, groundLayer);
+            wallOnRight = Physics2D.OverlapCircle((Vector2)transform.position + rightOffset, collisionRadius, groundLayer);
+
+            if (onGround && !isJumping)
+            {
+                jumpCharge = maxJumpCharge;
+            }
+
+            anim.SetBool("onGround", onGround);
+            anim.SetBool("onWall", onWall);
+            anim.SetBool("lean", lean);
+
+            if (!isDashing)
+            {
+                if (lean && rb.velocity.y <= 0) //untuk lompat tapi nge lean (wallslide)
+                    rb.velocity = new Vector2(0, wallSlideSpeed);
+                else
+                    rb.gravityScale = defaultGravityScale;
+            }
+            #endregion
         }
-
-        if (rb.velocity.y > 0 && (!Input.GetButton("Jump") || damaged)) //untuk lompat rendah
-        {
-            rb.velocity += Vector2.up * Physics2D.gravity.y * (lowJumpMultiplier - 1) * Time.deltaTime;
-        }
-        #endregion
-
-        #region Collision Detection
-        onGround = Physics2D.OverlapCircle((Vector2)transform.position + bottomOffset, collisionRadius, groundLayer);
-        onWall = Physics2D.OverlapCircle((Vector2)transform.position + leftOffset, collisionRadius, groundLayer) ||
-            Physics2D.OverlapCircle((Vector2)transform.position + rightOffset, collisionRadius, groundLayer);
-        wallOnRight = Physics2D.OverlapCircle((Vector2)transform.position + rightOffset, collisionRadius, groundLayer);
-
-        anim.SetBool("onGround", onGround);
-        anim.SetBool("onWall", onWall);
-        anim.SetBool("lean", lean);
-
-        if (!isDashing)
-        {
-            if (lean && rb.velocity.y <= 0) //untuk lompat tapi nge lean (wallslide)
-                rb.velocity = new Vector2(0, wallSlideSpeed);
-            else
-                rb.gravityScale = defaultGravityScale;
-        }
-        #endregion
     }
 
     private void OnDrawGizmosSelected()
@@ -242,16 +259,24 @@ public class CharacterMovement : MonoBehaviour
     {
         if (Input.GetButtonDown("Jump"))
         {
-            if (onGround)
-                DoJump();
-            else if (!onGround && leanExitTime > 0 && onWall)
+            if (!onGround && leanExitTime > 0 && onWall)
             {
                 leanExitTime = 0;
                 isWallJumping = true;
                 lean = false;
                 WallJump();
             }
+            else if (jumpCharge > 0)
+            {
+                DoJump();
+            }
         }
+    }
+
+    IEnumerator Jumping() {
+        isJumping = true;
+        yield return new WaitForSeconds(0.2f);
+        isJumping = false;
     }
 
     private void Attack() {
@@ -264,9 +289,13 @@ public class CharacterMovement : MonoBehaviour
     /// <summary>
     /// Function lompat ketika ada di ground
     /// </summary>
-    private void DoJump() {
+    private void DoJump()
+    {
+        StopCoroutine(Jumping());
+        StartCoroutine(Jumping());
         rb.velocity = new Vector2(rb.velocity.x, 0);
         rb.velocity += Vector2.up * jumpVelocity;
+        jumpCharge--;
     }
 
 
@@ -309,7 +338,7 @@ public class CharacterMovement : MonoBehaviour
     /// </summary>
     private void Dash()
     {
-        if (Input.GetButtonDown("Dash") && canDash)
+        if (Input.GetButtonDown("Dash") && canDash && CharacterSkills.instance.dashSkill)
         {
             DoDash(inputDir);
             audioSource.PlayOneShot(dashClip);
@@ -364,7 +393,7 @@ public class CharacterMovement : MonoBehaviour
         rb.drag = defaultLinearDrag;
     }
 
-    private void SpawnEcho() {
+    public void SpawnEcho() {
         GameObject echo = Instantiate(echoPrefab, anim.transform.position, Quaternion.identity, null);
         echo.GetComponent<SpriteRenderer>().sprite = playerSprite.GetComponent<SpriteRenderer>().sprite;
         if (playerSprite.localScale.x < 0)

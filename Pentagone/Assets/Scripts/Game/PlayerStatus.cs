@@ -1,6 +1,9 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Doozy.Engine.UI;
+using TMPro;
+using UnityEngine.UI;
 
 public class PlayerStatus : MonoBehaviour
 {
@@ -10,14 +13,23 @@ public class PlayerStatus : MonoBehaviour
     
     [SerializeField] [Range(1, 20)] private int currentMaxHp; //current maximum hp
     [SerializeField] private int currentHp; //current hp
-    public int dropCoin; //total drop coin
+    [SerializeField] private int dropCoin; //total drop coin
+    private int targetCoin;
+    public int skillPoint;
+    private float pointPercentage;
 
+    [Space(10)]
     [Header("UI")]
     [SerializeField] private GameObject healthBar; //bar hp
     [SerializeField] private GameObject[] healthPoint; //gambar point hpnya
+    [SerializeField] private TextMeshProUGUI menuSkillPoint;
+    [SerializeField] private Image menuSkillPointCoin;
 
-    [Header("Skills")]
-    public bool autoCollect;
+    [Space(10)]
+    [Header("PopUp")]
+    [SerializeField] private UIView popUpCoinView;
+    [SerializeField] private TextMeshProUGUI popUpSkillPoint;
+    [SerializeField] private Image popUpSkillPointCoin;
 
     private void Awake()
     {
@@ -29,13 +41,19 @@ public class PlayerStatus : MonoBehaviour
 
     void Start()
     {
+        targetCoin = 10;
+
         healthPoint = new GameObject[(int)maxHp];
         for (int i = 0; i < maxHp; i++)
         {
             healthPoint[i] = healthBar.transform.GetChild(i).gameObject;
         }
-        autoCollect = true;
         ResetHP();
+        pointPercentage = (float)dropCoin / (float)targetCoin;
+        menuSkillPointCoin.fillAmount = pointPercentage;
+        popUpSkillPointCoin.fillAmount = pointPercentage;
+        popUpSkillPoint.text = skillPoint.ToString();
+        menuSkillPoint.text = skillPoint.ToString();
     }
 
     /// <summary>
@@ -66,5 +84,35 @@ public class PlayerStatus : MonoBehaviour
 
     public void Collect() {
         dropCoin++;
+        pointPercentage = (float)dropCoin / (float)targetCoin;
+        menuSkillPointCoin.fillAmount = pointPercentage;
+        popUpSkillPointCoin.fillAmount = pointPercentage;
+        if (pointPercentage == 1)
+        {
+            pointPercentage = 0;
+            dropCoin = 0;
+            targetCoin += 10;
+            skillPoint++;
+            menuSkillPointCoin.fillAmount = pointPercentage;
+            popUpSkillPointCoin.fillAmount = pointPercentage;
+            popUpSkillPoint.text = skillPoint.ToString();
+            menuSkillPoint.text = skillPoint.ToString();
+        }
+
+        StopCoroutine(ShowCoin());
+        StartCoroutine(ShowCoin());
+    }
+
+    public void UsePoint() {
+        skillPoint--;
+        popUpSkillPoint.text = skillPoint.ToString();
+        menuSkillPoint.text = skillPoint.ToString();
+    }
+
+    IEnumerator ShowCoin()
+    {
+        popUpCoinView.Show();
+        yield return new WaitForSeconds(3f);
+        popUpCoinView.Hide();
     }
 }

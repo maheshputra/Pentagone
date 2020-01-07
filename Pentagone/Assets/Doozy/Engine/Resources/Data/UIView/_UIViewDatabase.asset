@@ -16,9 +16,13 @@ MonoBehaviour:
   CategoryNames:
   - Custom
   - Example
+  - Gameplay
+  - GameplayMenu
   - General
   - MainMenu
   Categories:
   - {fileID: 11400000, guid: b01e98f4801f7124ba39e1dac4debf90, type: 2}
+  - {fileID: 11400000, guid: c129d2fd779916141900993356c2a269, type: 2}
+  - {fileID: 11400000, guid: 147dce630ff596f4c8cb40765755312b, type: 2}
   - {fileID: 11400000, guid: 261c42050fc00fe46837b373861978a4, type: 2}
   - {fileID: 11400000, guid: 8399a1d1aaafcf7419162ee0677b1b36, type: 2}

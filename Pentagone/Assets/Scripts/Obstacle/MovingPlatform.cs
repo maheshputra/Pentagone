@@ -45,7 +45,7 @@ public class MovingPlatform : MonoBehaviour
     public void Triggered() {
         triggered = true;
         transform.position = path[0].position;
-        Debug.Log(gameObject.name);
+        //Debug.Log(gameObject.name);
     }
 
     /// <summary>

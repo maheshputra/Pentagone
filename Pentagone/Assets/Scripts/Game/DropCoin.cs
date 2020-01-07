@@ -4,10 +4,13 @@ using UnityEngine;
 
 public class DropCoin : MonoBehaviour
 {
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+    [SerializeField] private int totalCoin;
+    [SerializeField] private GameObject coin;
 
+    public void SpawnCoin() {
+        for (int i = 0; i < totalCoin; i++)
+        {
+            Instantiate(coin, transform.position, Quaternion.identity, null);
+        }
+    }
 }

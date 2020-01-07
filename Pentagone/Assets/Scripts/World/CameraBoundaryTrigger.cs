@@ -15,7 +15,7 @@ public class CameraBoundaryTrigger : MonoBehaviour
         if (collision.CompareTag("Player") && collision.isTrigger)
         {
             CameraBoundary.instance.SetNewBoundary(boundaryNumber);
-            Debug.Log(boundaryNumber);
+            //Debug.Log(boundaryNumber);
         }
     }
 }

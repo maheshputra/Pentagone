@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using DG.Tweening;
 
 public class TimeControl : MonoBehaviour
 {
@@ -18,6 +19,7 @@ public class TimeControl : MonoBehaviour
 
     public void DamagedTime() {
         StartCoroutine(ScaleTime2(0, 1, stopTime));
+        //StartCoroutine(ScaleTime3());
     }
 
     /// <summary>
@@ -66,4 +68,13 @@ public class TimeControl : MonoBehaviour
         Time.timeScale = end;
     }
 
+    /// <summary>
+    /// Implementasi dotween
+    /// </summary>
+    /// <returns></returns>
+    IEnumerator ScaleTime3() {
+        Time.timeScale = 0;
+        yield return new WaitForSeconds(0.15f);
+        DOTween.To(() => Time.timeScale, x => Time.timeScale = x, 1, 1);
+    }
 }

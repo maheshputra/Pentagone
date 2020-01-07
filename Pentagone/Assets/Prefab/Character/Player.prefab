@@ -128,6 +128,7 @@ Transform:
   m_Children:
   - {fileID: 4413446262085828038}
   - {fileID: 382171494049881243}
+  - {fileID: 5488542870502112529}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -212,18 +213,18 @@ MonoBehaviour:
   wallJumpVelocity: 12
   fallMultiplier: 4
   lowJumpMultiplier: 5
-  onGround: 0
+  onGround: 1
   onWall: 0
   wallOnRight: 0
   lean: 0
   groundLayer:
     serializedVersion: 2
     m_Bits: 256
-  collisionRadius: 0.1
+  collisionRadius: 0.03
   downSpeed: 1
   bottomOffset: {x: 0, y: -0.01}
-  rightOffset: {x: 0.33, y: 0.62}
-  leftOffset: {x: -0.29, y: 0.62}
+  rightOffset: {x: 0.21, y: 0.62}
+  leftOffset: {x: -0.21, y: 0.62}
   dashVelocity: 30
   dashLinearDrag: 7.5
   timeBetweenEchoSpawn: 0.04
@@ -550,3 +551,51 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!1 &8352906077038492484
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5488542870502112529}
+  - component: {fileID: 7699514275194041332}
+  m_Layer: 10
+  m_Name: Rewind
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5488542870502112529
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8352906077038492484}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 575389974599365800}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &7699514275194041332
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8352906077038492484}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2e85fc788e217bd48ace8ae4ff9b4017, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isRewinding: 0
+  recordTime: 1
+  character: {fileID: 575389974599365800}
+  spriteRenderer: {fileID: 4413446262085828037}
+  rigid: {fileID: 575389974599365802}
