@@ -8,14 +8,11 @@ public class AttackShake : MonoBehaviour
     [SerializeField] private float shakeTime;
     [SerializeField] private float amplitudeGain;
     [SerializeField] private float frequencyGain;
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        if (collision.CompareTag("Enemy"))
-        {
-            CinemachineVirtualCamera cm = Camera.main.GetComponent<CinemachineBrain>().ActiveVirtualCamera.VirtualCameraGameObject.GetComponent<CinemachineVirtualCamera>();
-            StopCoroutine("ShakeCamera");
-            StartCoroutine(ShakeCamera(cm));
-        }
+
+    public void ShakeCamera() {
+        CinemachineVirtualCamera cm = Camera.main.GetComponent<CinemachineBrain>().ActiveVirtualCamera.VirtualCameraGameObject.GetComponent<CinemachineVirtualCamera>();
+        StopCoroutine("ShakeCamera");
+        StartCoroutine(ShakeCamera(cm));
     }
 
     IEnumerator ShakeCamera(CinemachineVirtualCamera cm)

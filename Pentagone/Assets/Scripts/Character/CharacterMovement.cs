@@ -13,7 +13,7 @@ public class CharacterMovement : MonoBehaviour
     private Animator anim; //animator pada character
     private CharacterSprite characterSprite; //characterSprite pada playersprite
     private Vector3 currentScale; //transform scale player yang sekarang
-    private bool facingRight; //boolean dia menghadap 
+    private bool facingRight; //boolean dia menghadap
 
     private float inputX; //input horizontal
     private float inputY; //input vertical
@@ -31,6 +31,7 @@ public class CharacterMovement : MonoBehaviour
     [Range(1, 10)] [SerializeField] private float lowJumpMultiplier; //untuk jump yang tidak terlalu ditahan
 
     [Header("Collision Checker")]
+    [SerializeField] private bool showGizmos; //jika ingin di tunjukkan gizmosnya
     [SerializeField] private bool onGround; //kondisi ketika di ground
     [SerializeField] public int maxJumpCharge; //max jump charge
     [SerializeField] private int jumpCharge; //jumpCharge
@@ -97,8 +98,8 @@ public class CharacterMovement : MonoBehaviour
         {
             if (isWallJumping)
             {
-                inputX = 0;
-                inputY = 0;
+                //Tidak input movement yang diterima jika sedang melakukan walljump
+                CancelInput();
                 return;
             }
             else
@@ -108,6 +109,7 @@ public class CharacterMovement : MonoBehaviour
                     Walk(inputDir);
             }
 
+            //Mengubah arah player menghadap
             LookDirection();
             if (!damaged && !isDashing)
             {
@@ -127,63 +129,21 @@ public class CharacterMovement : MonoBehaviour
     {
         if (!GameStatus.instance.isPaused)
         {
-            #region Attack
-            if (isAttacking)
-                if (onGround)
-                    rb.velocity = new Vector2(0, rb.velocity.y);
-            #endregion
-
-            #region Jump
-            if (!isWallJumping)
-            {
-                if (rb.velocity.y < 0) //untuk lompat tinggi
-                    rb.velocity += Vector2.up * Physics2D.gravity.y * (fallMultiplier - 1) * Time.deltaTime;
-            }
-            else
-            {
-                if (wallJumpRight)
-                    rb.velocity = new Vector2(1, 1f) * wallJumpVelocity;
-                else
-                    rb.velocity = new Vector2(-1, 1f) * wallJumpVelocity;
-            }
-
-            if (rb.velocity.y > 0 && (!Input.GetButton("Jump") || damaged || !CharacterSkills.instance.holdJumpSkill)) //untuk lompat rendah
-            {
-                rb.velocity += Vector2.up * Physics2D.gravity.y * (lowJumpMultiplier - 1) * Time.deltaTime;
-            }
-            #endregion
-
-            #region Collision Detection
-            onGround = Physics2D.OverlapCircle((Vector2)transform.position + bottomOffset, collisionRadius, groundLayer);
-            onWall = Physics2D.OverlapCircle((Vector2)transform.position + leftOffset, collisionRadius, groundLayer) ||
-                Physics2D.OverlapCircle((Vector2)transform.position + rightOffset, collisionRadius, groundLayer);
-            wallOnRight = Physics2D.OverlapCircle((Vector2)transform.position + rightOffset, collisionRadius, groundLayer);
-
-            if (onGround && !isJumping)
-            {
-                jumpCharge = maxJumpCharge;
-            }
-
-            anim.SetBool("onGround", onGround);
-            anim.SetBool("onWall", onWall);
-            anim.SetBool("lean", lean);
-
-            if (!isDashing)
-            {
-                if (lean && rb.velocity.y <= 0) //untuk lompat tapi nge lean (wallslide)
-                    rb.velocity = new Vector2(0, wallSlideSpeed);
-                else
-                    rb.gravityScale = defaultGravityScale;
-            }
-            #endregion
+            AttackControl();
+            JumpControl();
+            CollisionDetection();
+            MovementControl();
         }
     }
 
     private void OnDrawGizmosSelected()
     {
-        Gizmos.DrawSphere((Vector2)transform.position + bottomOffset, collisionRadius);
-        Gizmos.DrawSphere((Vector2)transform.position + leftOffset, collisionRadius);
-        Gizmos.DrawSphere((Vector2)transform.position + rightOffset, collisionRadius);
+        if (showGizmos)
+        {
+            Gizmos.DrawSphere((Vector2)transform.position + bottomOffset, collisionRadius);
+            Gizmos.DrawSphere((Vector2)transform.position + leftOffset, collisionRadius);
+            Gizmos.DrawSphere((Vector2)transform.position + rightOffset, collisionRadius);
+        }
     }
 
     private void GetInput()
@@ -192,7 +152,23 @@ public class CharacterMovement : MonoBehaviour
         inputY = Input.GetAxis("Vertical");
         inputDir = new Vector2(inputX, inputY);
 
-        anim.SetFloat("moveY", rb.velocity.y); //untuk animasi lompat/jatuh
+        //untuk animasi lompat dan jatuh
+        anim.SetFloat("moveY", rb.velocity.y);
+    }
+
+    /// <summary>
+    /// Function untuk mendeteksi collision pada player
+    /// </summary>
+    private void CollisionDetection()
+    {
+        onGround = Physics2D.OverlapCircle((Vector2)transform.position + bottomOffset, collisionRadius, groundLayer);
+        onWall = Physics2D.OverlapCircle((Vector2)transform.position + leftOffset, collisionRadius, groundLayer) ||
+            Physics2D.OverlapCircle((Vector2)transform.position + rightOffset, collisionRadius, groundLayer);
+        wallOnRight = Physics2D.OverlapCircle((Vector2)transform.position + rightOffset, collisionRadius, groundLayer);
+
+        anim.SetBool("onGround", onGround);
+        anim.SetBool("onWall", onWall);
+        anim.SetBool("lean", lean);
     }
 
     /// <summary>
@@ -273,10 +249,48 @@ public class CharacterMovement : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Mencancel input
+    /// </summary>
+    private void CancelInput() {
+        inputX = 0;
+        inputY = 0;
+    }
+
     IEnumerator Jumping() {
         isJumping = true;
         yield return new WaitForSeconds(0.2f);
         isJumping = false;
+    }
+
+    private void JumpControl() {
+        if (!isWallJumping)
+        {
+            //untuk memanipulasi gravity
+            if (rb.velocity.y < 0)
+                rb.velocity += Vector2.up * Physics2D.gravity.y * (fallMultiplier - 1) * Time.deltaTime;
+        }
+        else
+        {
+            //force lompat ke kanan jika dari wall
+            if (wallJumpRight)
+                rb.velocity = new Vector2(1, 1f) * wallJumpVelocity;
+            //force lompat ke kiri jika dari wall
+            else
+                rb.velocity = new Vector2(-1, 1f) * wallJumpVelocity;
+        }
+
+        //untuk jatuh lebih cepat jika button jump tidak di tahan
+        if (rb.velocity.y > 0 && (!Input.GetButton("Jump") || damaged || !CharacterSkills.instance.holdJumpSkill)) //untuk lompat rendah
+        {
+            rb.velocity += Vector2.up * Physics2D.gravity.y * (lowJumpMultiplier - 1) * Time.deltaTime;
+        }
+
+        //jika menyentuh tanah jump charge ke reset
+        if (onGround && !isJumping)
+        {
+            jumpCharge = maxJumpCharge;
+        }
     }
 
     private void Attack() {
@@ -284,6 +298,12 @@ public class CharacterMovement : MonoBehaviour
         {
             anim.SetTrigger("attack");
         }
+    }
+
+    private void AttackControl() {
+        if (isAttacking)
+            if (onGround)
+                rb.velocity = new Vector2(0, rb.velocity.y);
     }
 
     /// <summary>
@@ -377,6 +397,16 @@ public class CharacterMovement : MonoBehaviour
         StartCoroutine(Dashing());
     }
 
+    private void MovementControl() {
+        if (!isDashing)
+        {
+            if (lean && rb.velocity.y <= 0) //untuk lompat tapi nge lean (wallslide)
+                rb.velocity = new Vector2(0, wallSlideSpeed);
+            else
+                rb.gravityScale = defaultGravityScale;
+        }
+    }
+
     /// <summary>
     /// function yang menentukan kondisi ketika sedang melakukan dash
     /// </summary>
@@ -411,25 +441,31 @@ public class CharacterMovement : MonoBehaviour
         {
             if (collision.CompareTag("EnemyAttack") || collision.CompareTag("EnemyProjectile"))
             {
-                PlayerStatus.instance.Damaged();
-                TimeControl.instance.DamagedTime();
-                StartCoroutine(Damaged());
-                rb.velocity = Vector2.zero;
-
-                if (collision.transform.position.x > transform.position.x)
-                    rb.velocity += new Vector2(-5, 15);
-                else
-                    rb.velocity += new Vector2(5, 15);
+                Damaged(collision.transform.position);
             }
         }
     }
 
-    private IEnumerator Damaged() {
+    public void Damaged(Vector3 collisionPos)
+    {
+        StartCoroutine(Damaging(collisionPos));
+    }
+
+    public IEnumerator Damaging(Vector3 collisionPos)
+    {
+        PlayerStatus.instance.Damaged();
+        TimeControl.instance.DamagedTime();
         damaged = true;
         anim.SetBool("damaged", damaged);
+        rb.velocity = Vector2.zero;
+
+        if (collisionPos.x > transform.position.x)
+            rb.velocity += new Vector2(-5, 15);
+        else
+            rb.velocity += new Vector2(5, 15);
+
         yield return new WaitForSeconds(0.5f);
         damaged = false;
         anim.SetBool("damaged", damaged);
     }
-
 }

@@ -1,2 +1,7 @@
-Base path: 'B:/Unity Editor/2019.2.2f1/Editor/Data', plugins path 'B:/Unity Editor/2019.2.2f1/Editor/Data/PlaybackEngines'
+Base path: 'B:/Unity Editor/2019.3.0f3/Editor/Data', plugins path 'B:/Unity Editor/2019.3.0f3/Editor/Data/PlaybackEngines'
+Cmd: initializeCompiler
+Cmd: compileComputeKernel
+  api=4 insize=18731 outsize=10442 ok=1
+Cmd: compileComputeKernel
+  api=4 insize=5032 outsize=5412 ok=1
 Cmd: initializeCompiler

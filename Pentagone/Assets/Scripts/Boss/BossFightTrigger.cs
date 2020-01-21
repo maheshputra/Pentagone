@@ -9,16 +9,11 @@ public class BossFightTrigger : MonoBehaviour
 
     [SerializeField] private bool right; //posisi player di kanan
     [SerializeField] private GameObject door;
+
     // Start is called before the first frame update
     void Start()
     {
         door.SetActive(false);
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-
     }
 
     private void OnTriggerExit2D(Collider2D collision)

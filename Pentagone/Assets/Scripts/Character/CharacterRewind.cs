@@ -46,7 +46,7 @@ public class CharacterRewind : MonoBehaviour
             if (Input.GetKeyDown(KeyCode.R))
                 if(rewindTime>0)
                     StartRewind();
-            if (Input.GetKeyUp(KeyCode.R) && !increaseRewindTime)
+            if (Input.GetKeyUp(KeyCode.R) && (!increaseRewindTime || isRewinding))
                 StopRewind();
 
             if (!holdRewindTime)

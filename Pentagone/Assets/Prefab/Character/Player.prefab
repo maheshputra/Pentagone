@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &2044645832
+--- !u!1 &618125854
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,85 +8,36 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 2044645833}
-  - component: {fileID: 3923342825116116430}
-  - component: {fileID: 2044645834}
-  - component: {fileID: 4293143924859331933}
-  m_Layer: 0
-  m_Name: Attack Collider
-  m_TagString: PlayerAttack
+  - component: {fileID: 618125855}
+  - component: {fileID: 2428746159266710417}
+  m_Layer: 10
+  m_Name: Attack Point
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &2044645833
+--- !u!4 &618125855
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2044645832}
+  m_GameObject: {fileID: 618125854}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.33333334, y: 0.33333334, z: 0.33333334}
+  m_LocalPosition: {x: -0.446, y: 0.351, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4413446262085828038}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!50 &3923342825116116430
-Rigidbody2D:
-  serializedVersion: 4
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2044645832}
-  m_BodyType: 1
-  m_Simulated: 1
-  m_UseFullKinematicContacts: 0
-  m_UseAutoMass: 0
-  m_Mass: 1
-  m_LinearDrag: 0
-  m_AngularDrag: 0.05
-  m_GravityScale: 1
-  m_Material: {fileID: 0}
-  m_Interpolate: 0
-  m_SleepingMode: 1
-  m_CollisionDetection: 0
-  m_Constraints: 7
---- !u!61 &2044645834
-BoxCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2044645832}
-  m_Enabled: 0
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: -1.5, y: 1}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0, y: 0}
-    oldSize: {x: 0, y: 0}
-    newSize: {x: 0, y: 0}
-    adaptiveTilingThreshold: 0
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  serializedVersion: 2
-  m_Size: {x: 3, y: 1}
-  m_EdgeRadius: 0
---- !u!114 &4293143924859331933
+--- !u!114 &2428746159266710417
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2044645832}
+  m_GameObject: {fileID: 618125854}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f4e8062081bf9f14c8063c71d4342b81, type: 3}
@@ -106,7 +57,7 @@ GameObject:
   - component: {fileID: 575389974599365800}
   - component: {fileID: 575389974599365802}
   - component: {fileID: 575389974599365803}
-  - component: {fileID: 6477594895247450632}
+  - component: {fileID: 261102577597196871}
   - component: {fileID: 575389974599365805}
   m_Layer: 10
   m_Name: Player
@@ -166,11 +117,11 @@ CircleCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0.16996479}
+  m_Offset: {x: 0, y: 0.15847665}
   serializedVersion: 2
-  m_Radius: 0.16132832
---- !u!61 &6477594895247450632
-BoxCollider2D:
+  m_Radius: 0.17281646
+--- !u!70 &261102577597196871
+CapsuleCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -182,19 +133,9 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0.4467131}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0, y: 0}
-    oldSize: {x: 0, y: 0}
-    newSize: {x: 0, y: 0}
-    adaptiveTilingThreshold: 0
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  serializedVersion: 2
-  m_Size: {x: 0.41009223, y: 0.8954184}
-  m_EdgeRadius: 0
+  m_Offset: {x: 0, y: 0.44287747}
+  m_Size: {x: 0.5, y: 0.9069754}
+  m_Direction: 0
 --- !u!114 &575389974599365805
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -213,14 +154,18 @@ MonoBehaviour:
   wallJumpVelocity: 12
   fallMultiplier: 4
   lowJumpMultiplier: 5
+  showGizmos: 1
   onGround: 1
+  maxJumpCharge: 0
+  jumpCharge: 0
+  isJumping: 0
   onWall: 0
   wallOnRight: 0
   lean: 0
   groundLayer:
     serializedVersion: 2
     m_Bits: 256
-  collisionRadius: 0.03
+  collisionRadius: 0.04
   downSpeed: 1
   bottomOffset: {x: 0, y: -0.01}
   rightOffset: {x: 0.21, y: 0.62}
@@ -234,7 +179,7 @@ MonoBehaviour:
   isDashing: 0
   isAttacking: 0
   damaged: 0
-  wallSlideSpeed: -3.5
+  wallSlideSpeed: -2
   audioSource: {fileID: 5674498581976865646}
   dashClip: {fileID: 8300000, guid: f3e3bab900401b84db54a4ae754b4ab3, type: 3}
 --- !u!1 &4413446261229943243
@@ -291,6 +236,8 @@ MonoBehaviour:
   m_UseNormalMap: 0
   m_LightOrder: 0
   m_AlphaBlendOnOverlap: 0
+  m_ShadowIntensity: 0
+  m_ShadowVolumeIntensity: 0
   m_PointLightInnerAngle: 360
   m_PointLightOuterAngle: 360
   m_PointLightInnerRadius: 0
@@ -338,7 +285,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4413446261229943221}
-  - {fileID: 2044645833}
+  - {fileID: 618125855}
   m_Father: {fileID: 575389974599365800}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -356,6 +303,7 @@ SpriteRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -424,6 +372,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isAttacking: 0
   isDashing: 0
+  attackDamage: 0
+  attackPoint: {fileID: 618125855}
+  attackRadius: 0.5
+  enemyLayer:
+    serializedVersion: 2
+    m_Bits: 2048
 --- !u!1 &5034787428374846528
 GameObject:
   m_ObjectHideFlags: 0
@@ -594,8 +548,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2e85fc788e217bd48ace8ae4ff9b4017, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  canRewind: 0
   isRewinding: 0
-  recordTime: 1
+  maxRewindTime: 0
+  rewindTime: 0
+  holdRewindTime: 0
+  increaseRewindTime: 0
   character: {fileID: 575389974599365800}
   spriteRenderer: {fileID: 4413446262085828037}
   rigid: {fileID: 575389974599365802}
+  rewindBar: {fileID: 0}
