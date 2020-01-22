@@ -97,13 +97,17 @@ MonoBehaviour:
     startState: Stop Attack
     states:
     - name: Attack
-      description: 
+      description: 'Play animasi untuk attack
+
+
+        Stop jika countdown sudah
+        habis'
       colorIndex: 3
       position:
         serializedVersion: 2
-        x: 243.375
-        y: 106.625
-        width: 106
+        x: 342.375
+        y: 110.625
+        width: 162
         height: 32
       isBreakpoint: 0
       isSequence: 0
@@ -238,13 +242,13 @@ MonoBehaviour:
         paramDataPos: 0000000000000000010000000000000000000000010000000200000001000000020000000300000000000000010000000200000001000000
         paramByteDataSize: 0000000000000000000000000000000001000000000000000000000000000000000000000000000000000000000000000000000001000000
     - name: Stop Attack
-      description: 
+      description: Cek variable attacking dari fsm pattern untuk melakukan attack
       colorIndex: 6
       position:
         serializedVersion: 2
         x: 59.28125
         y: 109.8125
-        width: 106
+        width: 200
         height: 32
       isBreakpoint: 0
       isSequence: 0
@@ -638,13 +642,14 @@ MonoBehaviour:
     startState: Get Sprite Scale
     states:
     - name: Moving Right
-      description: 
+      description: Jika di kanan bawah masih ada jalan dan di kanan atas tidak tertutup
+        ground maka jalan ke kanan
       colorIndex: 7
       position:
         serializedVersion: 2
-        x: 355
-        y: 165
-        width: 143
+        x: 492
+        y: 178
+        width: 200
         height: 48
       isBreakpoint: 0
       isSequence: 0
@@ -859,13 +864,14 @@ MonoBehaviour:
         paramDataPos: 0000000000000000010000000000000000000000010000000000000001000000020000000300000001000000020000000200000000000000010000000300000004000000000000000000000001000000020000000200000003000000050000000400000003000000040000000600000005000000050000000600000007000000
         paramByteDataSize: 0000000000000000000000000000000001000000000000000000000000000000000000000000000001000000010000000000000000000000000000000100000001000000000000000000000000000000000000000000000000000000010000000000000000000000000000000100000000000000000000000000000001000000
     - name: Moving Left
-      description: 
+      description: Jika di kiri bawah masih ada jalan dan di kiri atas tidak tertutup
+        ground maka jalan ke kiri
       colorIndex: 7
       position:
         serializedVersion: 2
-        x: 52
-        y: 163
-        width: 143
+        x: 59
+        y: 187
+        width: 200
         height: 48
       isBreakpoint: 0
       isSequence: 0
@@ -1080,13 +1086,13 @@ MonoBehaviour:
         paramDataPos: 0000000000000000000000000100000002000000000000000100000001000000000000000100000003000000020000000200000000000000010000000300000004000000000000000000000001000000020000000200000003000000050000000400000003000000040000000600000005000000050000000600000007000000
         paramByteDataSize: 0000000000000000000000000000000000000000010000000100000000000000000000000000000000000000010000000000000000000000000000000100000001000000000000000000000000000000000000000000000000000000010000000000000000000000000000000100000000000000000000000000000001000000
     - name: Cant Move
-      description: 
+      description: Kondisi ketika enemy tidak bisa bergerak kemana-mana
       colorIndex: 6
       position:
         serializedVersion: 2
-        x: 223
-        y: 264
-        width: 100
+        x: 274
+        y: 306
+        width: 200
         height: 32
       isBreakpoint: 0
       isSequence: 0
@@ -1106,7 +1112,7 @@ MonoBehaviour:
         customNames:
         - 
         actionEnabled: 01
-        actionIsOpen: 00
+        actionIsOpen: 01
         actionStartIndex: 00000000
         actionHashCodes: 490c8701
         unityObjectParams: []
@@ -1137,7 +1143,7 @@ MonoBehaviour:
           tooltip: 
           showInInspector: 0
           networkSync: 0
-          value: 0
+          value: 1
         fsmVector2Params: []
         fsmVector3Params: []
         fsmColorParams: []
@@ -1162,13 +1168,13 @@ MonoBehaviour:
         paramDataPos: 000000000000000001000000000000000100000000000000
         paramByteDataSize: 000000000000000000000000010000000100000000000000
     - name: Get Sprite Scale
-      description: 
+      description: Ambil value vector dari scale sprite untuk nanti di alter
       colorIndex: 3
       position:
         serializedVersion: 2
-        x: 199
+        x: 279
         y: 102.99219
-        width: 137
+        width: 200
         height: 32
       isBreakpoint: 0
       isSequence: 0
@@ -1572,13 +1578,17 @@ MonoBehaviour:
     startState: Set Default Value
     states:
     - name: Moving
-      description: 
+      description: 'Cek durasi move, jika 0 pindah ke attack
+
+
+        Set variable
+        moving untuk di fsm movement'
       colorIndex: 7
       position:
         serializedVersion: 2
-        x: 55
-        y: 173
-        width: 100
+        x: 57
+        y: 203
+        width: 180
         height: 32
       isBreakpoint: 0
       isSequence: 0
@@ -1606,7 +1616,7 @@ MonoBehaviour:
         - Move Time Countdown
         - Check Move Time Countdown
         actionEnabled: 0101010101
-        actionIsOpen: 0000000000
+        actionIsOpen: 0101000000
         actionStartIndex: 000000000300000006000000090000000d000000
         actionHashCodes: 27fbe10327fbe1039845b3052a6e8a001bcdca04
         unityObjectParams: []
@@ -1731,13 +1741,17 @@ MonoBehaviour:
         paramDataPos: 0000000001000000000000000200000003000000010000000000000001000000020000000200000003000000030000000400000004000000050000000600000000000000010000000200000005000000
         paramByteDataSize: 0000000000000000010000000000000000000000010000000000000000000000010000000000000000000000010000000100000000000000000000000000000000000000000000000000000001000000
     - name: Attacking
-      description: 
+      description: 'Cek durasi attack, jika 0 pindah ke move
+
+
+        Set variable
+        attack untuk di fsm attack'
       colorIndex: 7
       position:
         serializedVersion: 2
-        x: 221
-        y: 174
-        width: 100
+        x: 349
+        y: 201
+        width: 177.5
         height: 32
       isBreakpoint: 0
       isSequence: 0
@@ -1890,13 +1904,16 @@ MonoBehaviour:
         paramDataPos: 0000000001000000000000000200000003000000010000000000000001000000020000000200000003000000030000000400000004000000050000000600000000000000010000000200000005000000
         paramByteDataSize: 0000000000000000010000000000000000000000010000000000000000000000010000000000000000000000010000000100000000000000000000000000000000000000000000000000000001000000
     - name: Set Default Value
-      description: 
+      description: 'Set durasi attack
+
+
+        Set durasi move'
       colorIndex: 3
       position:
         serializedVersion: 2
-        x: 106
+        x: 186
         y: 100
-        width: 145
+        width: 132
         height: 32
       isBreakpoint: 0
       isSequence: 0
@@ -2300,13 +2317,23 @@ MonoBehaviour:
     startState: Line Cast
     states:
     - name: Line Cast
-      description: 
+      description: 'Linecasting untuk mendeteksi apakah ada ground di
+
+
+        Atas
+        kanan
+
+        Atas kiri
+
+        Bawah kanan
+
+        Bawah kiri'
       colorIndex: 3
       position:
         serializedVersion: 2
         x: 58
         y: 108
-        width: 100
+        width: 200
         height: 16
       isBreakpoint: 0
       isSequence: 0
@@ -3128,13 +3155,17 @@ MonoBehaviour:
     startState: Move
     states:
     - name: Move
-      description: 
+      description: 'Ambil variable di fsm pattern untuk cek moving
+
+
+        Velocity
+        diambil dr fsm move direction'
       colorIndex: 3
       position:
         serializedVersion: 2
-        x: 214
-        y: 100
-        width: 100
+        x: 299
+        y: 103
+        width: 200
         height: 32
       isBreakpoint: 0
       isSequence: 0
@@ -3158,7 +3189,7 @@ MonoBehaviour:
         - 
         - 
         actionEnabled: 010101
-        actionIsOpen: 000000
+        actionIsOpen: 000100
         actionStartIndex: 00000000050000000a000000
         actionHashCodes: efa8d30468fece05a4c8bf00
         unityObjectParams: []
@@ -3268,13 +3299,17 @@ MonoBehaviour:
         paramDataPos: 0000000000000000000000000100000000000000010000000000000001000000000000000100000001000000000000000100000002000000
         paramByteDataSize: 0000000000000000000000000000000001000000000000000000000000000000000000000100000000000000000000000000000001000000
     - name: Stop Move
-      description: 
+      description: 'Set velocity jadi 0 jika stop move
+
+
+        Cek variable di
+        fsm pattern untuk bergerak'
       colorIndex: 6
       position:
         serializedVersion: 2
         x: 56
         y: 101
-        width: 100
+        width: 188
         height: 32
       isBreakpoint: 0
       isSequence: 0

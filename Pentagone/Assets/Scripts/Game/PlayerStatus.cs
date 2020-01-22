@@ -84,7 +84,7 @@ public class PlayerStatus : MonoBehaviour
 
     public void Collect() {
         dropCoin++;
-        pointPercentage = (float)dropCoin / (float)targetCoin;
+        pointPercentage = (float)dropCoin / (float)targetCoin; 
         menuSkillPointCoin.fillAmount = pointPercentage;
         popUpSkillPointCoin.fillAmount = pointPercentage;
         if (pointPercentage == 1)

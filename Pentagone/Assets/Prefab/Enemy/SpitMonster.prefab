@@ -77,13 +77,14 @@ MonoBehaviour:
     startState: Sight
     states:
     - name: Sight
-      description: 
+      description: Value variable onSight ada di update script enemy sight di fsm
+        sight
       colorIndex: 3
       position:
         serializedVersion: 2
         x: 50
         y: 100
-        width: 100
+        width: 200
         height: 16
       isBreakpoint: 0
       isSequence: 0

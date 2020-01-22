@@ -446,9 +446,26 @@ public class CharacterMovement : MonoBehaviour
         }
     }
 
+    private void OnParticleCollision(GameObject other)
+    {
+        if (other.CompareTag("EnemyAttack"))
+        {
+            Damaged(other.transform.position);
+            StartCoroutine(ParticleCollDisable(other));
+        }
+    }
+
     public void Damaged(Vector3 collisionPos)
     {
         StartCoroutine(Damaging(collisionPos));
+    }
+
+    IEnumerator ParticleCollDisable(GameObject other)
+    {
+        var coll = other.GetComponent<ParticleSystem>().collision;
+        coll.enabled = false;
+        yield return new WaitForSeconds(3f);
+        coll.enabled = true;
     }
 
     public IEnumerator Damaging(Vector3 collisionPos)

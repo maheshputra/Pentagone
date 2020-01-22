@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class CameraBoundaryTrigger : MonoBehaviour
 {
-    public int boundaryNumber; //public karena akan di set dari instance camera boundary
+    public int boundaryNumber; //set sesuai nomor boundary
 
     /// <summary>
     /// Function untuk mengubah camera boundary jika terkena trigger tersebut

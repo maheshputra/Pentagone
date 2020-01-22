@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class MonsterStatus : MonoBehaviour
 {
-    [SerializeField] private Rigidbody2D rigid;
-    [SerializeField] private Animator anim;
+    [SerializeField] private Rigidbody2D rigid; //bisa di fill/tidak
+    [SerializeField] private Animator anim; //bisa di fill/tidak
 
     [SerializeField] private int maxHp; //max hp yang ada di monster
     public int currentHp; //current hp monster
@@ -20,8 +20,10 @@ public class MonsterStatus : MonoBehaviour
 
     private void Awake()
     {
-        rigid = GetComponent<Rigidbody2D>();
-        anim = transform.Find("Sprite").GetComponent<Animator>();
+        if(rigid==null)
+            rigid = GetComponent<Rigidbody2D>();
+        if(anim==null)
+            anim = transform.Find("Sprite").GetComponent<Animator>();
     }
 
     // Start is called before the first frame update

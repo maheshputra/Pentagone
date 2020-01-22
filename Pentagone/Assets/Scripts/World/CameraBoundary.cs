@@ -23,10 +23,10 @@ public class CameraBoundary : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        for (int i = 0; i < cameraBoundaryTrigger.Length; i++)
-        {
-            cameraBoundaryTrigger[i].boundaryNumber = i;
-        }
+        //for (int i = 0; i < cameraBoundaryTrigger.Length; i++)
+        //{
+        //    cameraBoundaryTrigger[i].boundaryNumber = i;
+        //}
 
         for (int i = 0; i < virtualCamera.Length; i++)
         {
