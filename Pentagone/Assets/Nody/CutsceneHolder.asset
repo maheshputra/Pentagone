@@ -65,7 +65,7 @@ MonoBehaviour:
     m_id: 19eb273c-3a53-411b-b6cc-060f329a2a59
     m_nodeId: c01312a5-31b0-4349-97d4-a782e6f18a77
     m_socketName: OutputSocket_0
-    m_value: '{"ButtonCategory":"General","ButtonName":"Back","GameEvent":"","TimeDelay":5.0,"Trigger":4}'
+    m_value: '{"ButtonCategory":"General","ButtonName":"Back","GameEvent":"","TimeDelay":40.0,"Trigger":4}'
     m_valueTypeQualifiedName: Doozy.Engine.UI.Connections.UIConnection, Assembly-CSharp,
       Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
   m_nodeType: 4
@@ -112,7 +112,7 @@ MonoBehaviour:
   m_version: 1
   m_description: 
   m_id: e75e8ad8-184a-4fd7-b15f-ae0322e78a22
-  m_lastModified: 132257959496807502
+  m_lastModified: 132257966731249344
 --- !u!114 &3512213745839126071
 MonoBehaviour:
   m_ObjectHideFlags: 1
