@@ -43,10 +43,10 @@ public class CharacterRewind : MonoBehaviour
     {
         if(canRewind && !GameStatus.instance.isPaused)
         {
-            if (Input.GetKeyDown(KeyCode.R))
+            if (Input.GetButtonDown("Dash"))
                 if(rewindTime>0)
                     StartRewind();
-            if (Input.GetKeyUp(KeyCode.R) && (!increaseRewindTime || isRewinding))
+            if (Input.GetButtonUp("Dash") && (!increaseRewindTime || isRewinding))
                 StopRewind();
 
             if (!holdRewindTime)

@@ -269,7 +269,7 @@ MonoBehaviour:
   m_MinSize: {x: 903, y: 221}
   m_MaxSize: {x: 8003, y: 4021}
   vertical: 0
-  controlID: 158
+  controlID: 75
 --- !u!114 &12
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -473,9 +473,9 @@ MonoBehaviour:
   m_SceneHierarchy:
     m_TreeViewState:
       scrollPos: {x: 0, y: 0}
-      m_SelectedIDs: 00640000
-      m_LastClickedID: 25600
-      m_ExpandedIDs: 40fbffff765b0000925d0000
+      m_SelectedIDs: 
+      m_LastClickedID: 0
+      m_ExpandedIDs: 40fbffff
       m_RenameOverlay:
         m_UserAcceptedRename: 0
         m_Name: 
@@ -535,9 +535,9 @@ MonoBehaviour:
   m_PlayAudio: 0
   m_AudioPlay: 0
   m_Position:
-    m_Target: {x: 227.39192, y: 19.780624, z: -0.42814794}
+    m_Target: {x: -18.064775, y: -5.7231874, z: -11.948643}
     speed: 2
-    m_Value: {x: 227.34587, y: 19.783009, z: -0.4159911}
+    m_Value: {x: -18.064775, y: -5.7231874, z: -11.948643}
   m_RenderMode: 0
   m_CameraMode:
     drawMode: 0
@@ -587,9 +587,9 @@ MonoBehaviour:
     speed: 2
     m_Value: {x: 0, y: 0, z: 0, w: 1}
   m_Size:
-    m_Target: 3.2230904
+    m_Target: 80.73777
     speed: 2
-    m_Value: 3.3749638
+    m_Value: 80.73777
   m_Ortho:
     m_Target: 1
     speed: 2
@@ -1559,13 +1559,48 @@ MonoBehaviour:
       stateName: 
       stateNames: []
       transitionIndex: 0
-      scrollPosition: {x: 0, y: 0}
+      scrollPosition: {x: -137, y: -137}
       zoom: 1
     selectionHistory:
-      backList: []
+      backList:
+      - fsmComponentID: 24396
+        fsmComponent: {fileID: 0}
+        fsmTemplate: {fileID: 0}
+      - fsmComponentID: 25082
+        fsmComponent: {fileID: 0}
+        fsmTemplate: {fileID: 0}
+      - fsmComponentID: 24396
+        fsmComponent: {fileID: 0}
+        fsmTemplate: {fileID: 0}
+      - fsmComponentID: 25082
+        fsmComponent: {fileID: 0}
+        fsmTemplate: {fileID: 0}
+      - fsmComponentID: 24396
+        fsmComponent: {fileID: 0}
+        fsmTemplate: {fileID: 0}
       forwardList: []
-      selectionCache: []
-      recentlySelectedList: []
+      selectionCache:
+      - fsmComponentID: 24396
+        fsmTemplate: {fileID: 0}
+        stateName: WaitForStartFight
+        stateNames: []
+        transitionIndex: 0
+        scrollPosition: {x: 0, y: 60}
+        zoom: 1
+      - fsmComponentID: 25082
+        fsmTemplate: {fileID: 0}
+        stateName: GetBool
+        stateNames: []
+        transitionIndex: 0
+        scrollPosition: {x: 214.95001, y: 164.85114}
+        zoom: 1
+      recentlySelectedList:
+      - fsmComponentID: 24396
+        fsmComponent: {fileID: 0}
+        fsmTemplate: {fileID: 0}
+      - fsmComponentID: 25082
+        fsmComponent: {fileID: 0}
+        fsmTemplate: {fileID: 0}
     debugger:
       stepMode: 0
 --- !u!114 &24
