@@ -4,22 +4,13 @@ using UnityEngine;
 
 public class Breakable : MonoBehaviour
 {
-    
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+    public void BreakObject() {
+        Destroy(gameObject);
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject.CompareTag("PlayerAttack"))
-            Destroy(gameObject);
+            BreakObject();
     }
 }

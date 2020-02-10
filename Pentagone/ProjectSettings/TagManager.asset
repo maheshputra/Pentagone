@@ -24,8 +24,8 @@ TagManager:
   - Enemy
   - Boss
   - DropObject
-  - 
-  - 
+  - Trigger
+  - Breakable
   - 
   - 
   - 

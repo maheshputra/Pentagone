@@ -15,6 +15,8 @@ public class CharacterSprite : MonoBehaviour
     [SerializeField] private Transform attackPoint;
     [SerializeField] private float attackRadius;
     [SerializeField] private LayerMask enemyLayer;
+    [SerializeField] private LayerMask breakableLayer;
+    [SerializeField] private LayerMask triggerLayer;
     private void Start()
     {
         anim = GetComponent<Animator>();
@@ -41,6 +43,20 @@ public class CharacterSprite : MonoBehaviour
             MonsterStatus monsterStatus = enemy.GetComponent<MonsterStatus>();
             monsterStatus.Damaged(attackDamage);
             Debug.Log(monsterStatus.gameObject.name + " " + monsterStatus.GetCurrentHp());
+        }
+
+        Collider2D[] breakableHit = Physics2D.OverlapCircleAll(attackPoint.position, attackRadius, breakableLayer);
+        foreach (Collider2D temp in breakableHit)
+        {
+            Breakable breakable = temp.GetComponent<Breakable>();
+            breakable.BreakObject();
+        }
+
+        Collider2D[] triggerHit = Physics2D.OverlapCircleAll(attackPoint.position, attackRadius, triggerLayer);
+        foreach (Collider2D temp in triggerHit)
+        {
+            TriggerSwitch trig = temp.GetComponent<TriggerSwitch>();
+            trig.Triggered();
         }
     }
 }

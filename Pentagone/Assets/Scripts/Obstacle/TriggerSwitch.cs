@@ -27,25 +27,29 @@ public class TriggerSwitch : MonoBehaviour
     {
         if (collision.CompareTag("PlayerAttack"))
         {
-            if (!triggered)
+            Triggered();
+        }
+    }
+
+    public void Triggered() {
+        if (!triggered)
+        {
+            for (int i = 0; i < triggerFor.Count; i++)
             {
-                for (int i = 0; i < triggerFor.Count; i++)
+                switch (triggerFor[i])
                 {
-                    switch (triggerFor[i])
-                    {
-                        case TriggerFor.MovingPlatform:
-                            target[i].GetComponent<MovingPlatform>().isTrigger = true;
-                            break;
-                        case TriggerFor.Torch:
-                            target[i].GetComponent<Torch>().isTrigger = true;
-                            break;
-                    }
+                    case TriggerFor.MovingPlatform:
+                        target[i].GetComponent<MovingPlatform>().isTrigger = true;
+                        break;
+                    case TriggerFor.Torch:
+                        target[i].GetComponent<Torch>().isTrigger = true;
+                        break;
                 }
-                Debug.Log("Triggered");
-                triggered = true;
-                audioSource.PlayOneShot(triggerClip);
-                gameObject.GetComponent<SpriteRenderer>().sprite = triggeredSprite;
             }
+            Debug.Log("Triggered");
+            triggered = true;
+            audioSource.PlayOneShot(triggerClip);
+            gameObject.GetComponent<SpriteRenderer>().sprite = triggeredSprite;
         }
     }
 }
